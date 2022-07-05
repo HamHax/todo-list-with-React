@@ -47,14 +47,19 @@ class App extends Component {
       age: this.nextUserAge.current.value,
       id: this.state.nextUserId
     }
-    this.setState({
-      nextUserId: this.state.nextUserId + 1,
-      userlist: this.state.userlist.concat(newUser)
-    })
-    
-
+    if(
+      this.nextUserName.current.value.length >=2 
+      && this.nextUserName.current.value.length <=10
+      && this.nextUserSurname.current.value.length >=2
+      && this.nextUserSurname.current.value.length <=12
+      && this.nextUserAge.current.value > 18 
+      && this.nextUserAge.current.value < 70) {
+      this.setState({
+        nextUserId: this.state.nextUserId + 1,
+        userlist: this.state.userlist.concat(newUser)
+      })
+    }
   }
-
 
 
   render() {
@@ -64,7 +69,7 @@ class App extends Component {
         <Input onChange={this.changeName}  type='text'/>
         <br />
         <Inlinetext> new user name </Inlinetext>
-        <Input propsRef={this.nextUserName} type='text' />
+        <Input  propsRef={this.nextUserName} type='text' />
         <br />
         <Inlinetext> new user surname </Inlinetext>
         <Input propsRef={this.nextUserSurname} type='text' />
